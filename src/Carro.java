@@ -3,9 +3,11 @@ public class Carro {
     private String modelo;
     private Motor motor;
     private TanqueCombustivel tanque;
+    private TipoCombustivel conteudoCombustivel;
 
     public Carro(String modelo, TipoCombustivel tipoCombustivel, int consumoMotor, int capacidadeTanque) {
         this.modelo = modelo;
+        conteudoCombustivel = tipoCombustivel;
         motor = new Motor(tipoCombustivel, consumoMotor);
         tanque = new TanqueCombustivel(tipoCombustivel, capacidadeTanque);
     }
@@ -22,10 +24,11 @@ public class Carro {
     public int abastece(TipoCombustivel tipoCombustivel, int quantidade) {
         int capacidadeLivre = tanque.getCapacidade() - tanque.getCombustivelDisponivel();
         if (capacidadeLivre < quantidade) {
-            tanque.abastece(tipoCombustivel, capacidadeLivre);
+            this.conteudoCombustivel = tipoCombustivel;
+            tanque.abastece(conteudoCombustivel, capacidadeLivre);
             return capacidadeLivre;
         } else {
-            tanque.abastece(tipoCombustivel, quantidade);
+            tanque.abastece(conteudoCombustivel, quantidade);
             return quantidade;
         }
     }

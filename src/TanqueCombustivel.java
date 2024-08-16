@@ -29,6 +29,13 @@ public class TanqueCombustivel {
             if (this.tipoCombustivel == TipoCombustivel.FLEX) {
                 if (!(tipoCombustivel == TipoCombustivel.GASOLINA || tipoCombustivel == TipoCombustivel.ALCOOL)) {
                     return false;
+                }else{
+                    if (getCombustivelDisponivel() + quantidade > getCapacidade()) {
+                        return false;
+                    } else {
+                        combustivelDisponivel += quantidade;
+                        return true;
+                    }
                 }
             } else {
                 return false;
